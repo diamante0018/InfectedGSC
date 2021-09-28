@@ -91,7 +91,7 @@ GlowStickDamageListenerStub( owner )
 {
     self endon ( "death" );
 
-    self setCanDamage( false );
+    self setCanDamage( true );
 
     self.health = 999999;
     self.maxHealth = 100;
