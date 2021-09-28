@@ -84,16 +84,16 @@ giveAllPerks()
     perks[ perks.size ] = "specialty_reducedsway";
     perks[ perks.size ] = "specialty_lightweight";
 
-	foreach( perkName in perks )
-	{
-		if( !self _hasPerk( perkName ) )
-		{
-			self givePerk( perkName, false );
-			if( maps\mp\gametypes\_class::isPerkUpgraded( perkName ) )
-			{
-				perkUpgrade = tablelookup( "mp/perktable.csv", 1, perkName, 8 );
-				self givePerk( perkUpgrade, false );
-			}
-		}
-	}
+    foreach( perkName in perks )
+    {
+        if( !self _hasPerk( perkName ) )
+        {
+            self givePerk( perkName, false );
+            if( maps\mp\gametypes\_class::isPerkUpgraded( perkName ) )
+            {
+                perkUpgrade = tablelookup( "mp/perktable.csv", 1, perkName, 8 );
+                self givePerk( perkUpgrade, false );
+            }
+        }
+    }
 }
