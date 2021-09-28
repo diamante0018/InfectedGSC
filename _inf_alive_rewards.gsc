@@ -29,15 +29,15 @@ onConnect()
 
 monitorForRewards()
 {
-    self endon( "disconnect" );
-    level endon( "game_ended" );
-    for ( ;; )
-    {
-        self waittill( "killed_enemy" );
-        if ( self.sessionteam == "axis" ) return; // It's infected. Once your team is axis you are done for the game
-        count = self.kills;
-        switch( count )
-        {
+	self endon( "disconnect" );
+	level endon( "game_ended" );
+	for ( ;; )
+	{
+		self waittill( "killed_enemy" );
+		if ( self.sessionteam == "axis" ) return; // It's infected. Once your team is axis you are done for the game
+		count = self.kills;
+		switch( count )
+		{
 		case 1:
 			self scripts\_inf_utils::playLeaderDialog( "kill_confirmed" );
 			level thread dropAmmo( self );
@@ -67,7 +67,7 @@ monitorForRewards()
 			level thread maps\mp\killstreaks\_airdrop::dropNuke( self.origin, self, "nuke_drop" );
 			break;
 		}
-    }
+	}
 }
 
 dropAmmo( owner )
