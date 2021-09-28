@@ -1,7 +1,7 @@
 /*
-	_inf_model
-	Author: FutureRave
-	Date: 27/09/2021
+    _inf_model
+    Author: FutureRave
+    Date: 27/09/2021
     Notes: Fuck the models for now
 */
 
@@ -61,28 +61,28 @@ giveAllPerks()
     perks[ perks.size ] = "specialty_longersprint";
     perks[ perks.size ] = "specialty_fastreload";
     perks[ perks.size ] = "specialty_scavenger";
-	perks[ perks.size ] = "specialty_blindeye";
-	perks[ perks.size ] = "specialty_paint";
-	perks[ perks.size ] = "specialty_hardline";
-	perks[ perks.size ] = "specialty_coldblooded";
-	perks[ perks.size ] = "specialty_quickdraw";
+    perks[ perks.size ] = "specialty_blindeye";
+    perks[ perks.size ] = "specialty_paint";
+    perks[ perks.size ] = "specialty_hardline";
+    perks[ perks.size ] = "specialty_coldblooded";
+    perks[ perks.size ] = "specialty_quickdraw";
 
     perks[ perks.size ] = "_specialty_blastshield";
-	perks[ perks.size ] = "specialty_detectexplosive";
-	perks[ perks.size ] = "specialty_autospot";
-	perks[ perks.size ] = "specialty_bulletaccuracy";
+    perks[ perks.size ] = "specialty_detectexplosive";
+    perks[ perks.size ] = "specialty_autospot";
+    perks[ perks.size ] = "specialty_bulletaccuracy";
 
-	perks[ perks.size ] = "specialty_quieter";
-	perks[ perks.size ] = "specialty_stalker";
+    perks[ perks.size ] = "specialty_quieter";
+    perks[ perks.size ] = "specialty_stalker";
 
-	perks[ perks.size ] = "specialty_bulletpenetration";
-	perks[ perks.size ] = "specialty_marksman";
-	perks[ perks.size ] = "specialty_sharp_focus";
-	perks[ perks.size ] = "specialty_holdbreathwhileads";
-	perks[ perks.size ] = "specialty_longerrange";
-	perks[ perks.size ] = "specialty_fastermelee";
-	perks[ perks.size ] = "specialty_reducedsway";
-	perks[ perks.size ] = "specialty_lightweight";
+    perks[ perks.size ] = "specialty_bulletpenetration";
+    perks[ perks.size ] = "specialty_marksman";
+    perks[ perks.size ] = "specialty_sharp_focus";
+    perks[ perks.size ] = "specialty_holdbreathwhileads";
+    perks[ perks.size ] = "specialty_longerrange";
+    perks[ perks.size ] = "specialty_fastermelee";
+    perks[ perks.size ] = "specialty_reducedsway";
+    perks[ perks.size ] = "specialty_lightweight";
 
 	foreach( perkName in perks )
 	{

@@ -1,7 +1,7 @@
 /*
-	_inf_anti_camp
-	Author: FutureRave
-	Date: 27/09/2021
+    _inf_anti_camp
+    Author: FutureRave
+    Date: 27/09/2021
 */
 
 #include common_scripts\utility;

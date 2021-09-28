@@ -1,7 +1,7 @@
 /*
-	_inf_utils
-	Author: FutureRave
-	Date: 26/09/2021
+    _inf_utils
+    Author: FutureRave
+    Date: 26/09/2021
 */
 
 #include common_scripts\utility;
@@ -114,35 +114,35 @@ GlowStickDamageListenerStub( owner )
         }
 
         if( isPlayer( attacker ) )
-		{
-			attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback( "tactical_insertion" );
-		}
+        {
+            attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback( "tactical_insertion" );
+        }
 
         if ( self.damageTaken >= self.maxHealth )
-		{
-			if ( isDefined( owner ) && attacker != owner )
-			{
-				attacker notify ( "destroyed_insertion", owner );
-				attacker notify( "destroyed_explosive" ); // count towards SitRep Pro challenge
-				owner thread leaderDialogOnPlayer( "ti_destroyed" );
-			}
-			
-			attacker thread maps\mp\perks\_perkfunctions::deleteTI( self );
-		}
+        {
+            if ( isDefined( owner ) && attacker != owner )
+            {
+                attacker notify ( "destroyed_insertion", owner );
+                attacker notify( "destroyed_explosive" ); // count towards SitRep Pro challenge
+                owner thread leaderDialogOnPlayer( "ti_destroyed" );
+            }
+
+            attacker thread maps\mp\perks\_perkfunctions::deleteTI( self );
+        }
     }
 }
 
 GlowStickEnemyUseListenerStub( owner )
 {
     self endon ( "death" );
-	level endon ( "game_ended" );
-	owner endon ( "disconnect" );
+    level endon ( "game_ended" );
+    owner endon ( "disconnect" );
+
+    self.enemyTrigger setCursorHint( "HINT_NOICON" );
+    self.enemyTrigger setHintString( &"MP_DESTROY_TI" );
+    self.enemyTrigger makeEnemyUsable( owner );
 	
-	self.enemyTrigger setCursorHint( "HINT_NOICON" );
-	self.enemyTrigger setHintString( &"MP_DESTROY_TI" );
-	self.enemyTrigger makeEnemyUsable( owner );
-	
-	for ( ;; )
+    for ( ;; )
     {
         self.enemyTrigger waittill ( "trigger", player );
         player iPrintLnBold( "Nice try" );

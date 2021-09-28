@@ -11,11 +11,11 @@ init()
 {
 	replaceFunc(  maps\mp\killstreaks\_juggernaut::giveJuggernaut, ::giveJuggernautStub );
 
-    maps\mp\killstreaks\_airdrop::addCrateType( "nuke_drop", "nuke", 1, maps\mp\killstreaks\_airdrop::nukeCrateThink );
-    maps\mp\killstreaks\_airdrop::addCrateType( "airdrop", "ammo", 17, ::ammoCrateThink );
-    maps\mp\killstreaks\_airdrop::addCrateType( "airdrop_mega", "ammo", 12, ::ammoCrateThink );
+	maps\mp\killstreaks\_airdrop::addCrateType( "nuke_drop", "nuke", 1, maps\mp\killstreaks\_airdrop::nukeCrateThink );
+	maps\mp\killstreaks\_airdrop::addCrateType( "airdrop", "ammo", 17, ::ammoCrateThink );
+	maps\mp\killstreaks\_airdrop::addCrateType( "airdrop_mega", "ammo", 12, ::ammoCrateThink );
 
-    thread onConnect();
+	thread onConnect();
 }
 
 onConnect()
@@ -38,10 +38,10 @@ monitorForRewards()
         count = self.kills;
         switch( count )
         {
-        case 1:
-            self scripts\_inf_utils::playLeaderDialog( "kill_confirmed" );
-            level thread dropAmmo( self );
-            break;
+		case 1:
+			self scripts\_inf_utils::playLeaderDialog( "kill_confirmed" );
+			level thread dropAmmo( self );
+			break;
 		case 5:
 			self maps\mp\killstreaks\_killstreaks::giveKillstreak( "deployable_vest" );
 			break;
@@ -66,7 +66,7 @@ monitorForRewards()
 		case 120:
 			level thread maps\mp\killstreaks\_airdrop::dropNuke( self.origin, self, "nuke_drop" );
 			break;
-        }
+		}
     }
 }
 
@@ -85,7 +85,7 @@ dropAmmo( owner )
     startPos = dropSite + ( AnglesToForward( direction ) * ( -1 * planeHalfDistance ) );
     startPos = startPos * ( 1, 1, 0 ) + ( 0, 0, lbHeight );
 
-    endPos = dropSite + ( AnglesToForward( direction ) * planeHalfDistance );
+	endPos = dropSite + ( AnglesToForward( direction ) * planeHalfDistance );
 	endPos = endPos * ( 1, 1, 0 ) + ( 0, 0, lbHeight );
 
     d = length( startPos - endPos );
@@ -94,10 +94,10 @@ dropAmmo( owner )
 	c130 = maps\mp\killstreaks\_airdrop::c130Setup( owner, startPos, endPos );
 	c130.veh_speed = planeFlySpeed;
 	c130.dropType = "airdrop";
- 	c130 playloopsound( "veh_ac130_dist_loop" );
+	c130 playloopsound( "veh_ac130_dist_loop" );
 
-    c130.angles = direction;
-    forward = anglesToForward( direction );
+	c130.angles = direction;
+	forward = anglesToForward( direction );
 	c130 moveTo( endPos, flyTime, 0, 0 ); 
 
 	boomPlayed = false;
@@ -124,7 +124,7 @@ dropAmmo( owner )
 				boomPlayed = true;
 			}
 		}	
-		
+
 		wait( .05 );	
 	}	
 	
