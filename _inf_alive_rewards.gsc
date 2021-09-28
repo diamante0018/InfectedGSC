@@ -72,24 +72,24 @@ monitorForRewards()
 
 dropAmmo( owner )
 {
-    planeHalfDistance = 24000;
-    planeFlySpeed = 2000;
-    yaw = RandomInt( 360 );
+	planeHalfDistance = 24000;
+	planeFlySpeed = 2000;
+	yaw = RandomInt( 360 );
 
-    yaw = RandomInt( 360 );
-    direction = ( 0, yaw, 0 );
+	yaw = RandomInt( 360 );
+	direction = ( 0, yaw, 0 );
 
-    dropSite = owner.origin;
-    lbheight = level maps\mp\killstreaks\_airdrop::getFlyHeightOffset( dropSite );
+	dropSite = owner.origin;
+	lbheight = level maps\mp\killstreaks\_airdrop::getFlyHeightOffset( dropSite );
 
-    startPos = dropSite + ( AnglesToForward( direction ) * ( -1 * planeHalfDistance ) );
-    startPos = startPos * ( 1, 1, 0 ) + ( 0, 0, lbHeight );
+	startPos = dropSite + ( AnglesToForward( direction ) * ( -1 * planeHalfDistance ) );
+	startPos = startPos * ( 1, 1, 0 ) + ( 0, 0, lbHeight );
 
 	endPos = dropSite + ( AnglesToForward( direction ) * planeHalfDistance );
 	endPos = endPos * ( 1, 1, 0 ) + ( 0, 0, lbHeight );
 
-    d = length( startPos - endPos );
-    flyTime = ( d / planeFlySpeed );
+	d = length( startPos - endPos );
+	flyTime = ( d / planeFlySpeed );
 	
 	c130 = maps\mp\killstreaks\_airdrop::c130Setup( owner, startPos, endPos );
 	c130.veh_speed = planeFlySpeed;
@@ -110,11 +110,9 @@ dropAmmo( owner )
 			minDist = dist;
 		else if ( dist > minDist )
 			break;
-		
+
 		if ( dist < 256 )
-		{
 			break;
-		}
 		else if ( dist < 768 )
 		{
 			earthquake( 0.15, 1.5, dropSite, 1500 );
