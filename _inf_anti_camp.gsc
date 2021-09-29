@@ -31,14 +31,14 @@ connected()
     for ( ;; )
     {
         self waittill( "spawned_player" );
-        if ( self.sessionteam != "allies" )
+        if ( self.pers["team"] != "allies" )
             self.anti_camp = false;
     }
 }
 
 startAntiCamp()
 {
-    assert( self.sessionteam == "allies" );
+    assert( self.pers["team"] == "allies" );
 
     level endon( "game_ended" );
     self endon ( "disconnect" );
@@ -76,7 +76,7 @@ monitorKillStreak()
     {
         self waittill( "killed_enemy" );
         count = self getPlayerData( "killstreaksState", "count" );
-        if ( count > 24 && self.sessionteam != "axis" )
+        if ( count > 24 && self.pers["team"] != "axis" )
         {
             self.anti_camp = true;
             self thread startAntiCamp();

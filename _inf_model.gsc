@@ -10,6 +10,8 @@
 
 init()
 {
+    replaceFunc(  maps\mp\gametypes\_teams::playerModelForWeapon, ::playerModelForWeaponStub );
+
     thread onConnect();
 
     preCacheShader( "specialty_carepackage_crate" );
@@ -37,17 +39,12 @@ connected()
     {
         self waittill( "spawned_player" );
         waittillframeend;
-        if ( self.sessionteam == "allies" )
+        if ( self.pers["team"] == "allies" )
         {
             self giveAllPerks();
         }
         else
         {
-/*
-            team = self.team;
-            [[game[ self.team + "_model" ][ "GHILLIE" ]]]();
-            self.isSniper = true;
-*/
             self giveAllPerks();
             self SetOffhandPrimaryClass( "other" );
             self giveWeapon( "bouncingbetty_mp" );
@@ -95,5 +92,60 @@ giveAllPerks()
                 self givePerk( perkUpgrade, false );
             }
         }
+    }
+}
+
+playerModelForWeaponStub( weapon, secondary )
+{
+    team = self.team;
+
+    if ( isDefined( game[ team + "_model" ][weapon] ) )
+    {
+        [[game[ team + "_model" ][weapon]]]();
+        return;
+    }
+
+    if ( self.pers["team"] == "axis" )
+    {
+        if ( level.environment != "" && self isItemUnlocked( "ghillie_" + level.environment ) )
+            [[game[ team + "_model" ]["GHILLIE"]]]();
+        else
+            [[game[ team + "_model" ]["SNIPER"]]]();
+        return;
+    }
+
+    weaponClass = tablelookup( "mp/statstable.csv", 4, weapon, 2 );
+
+    switch ( weaponClass )
+    {
+    case "weapon_smg":
+        [[game[ team + "_model" ]["SMG"]]]();
+        break;
+    case "weapon_assault":
+        [[game[ team + "_model" ]["ASSAULT"]]]();
+        break;
+    case "weapon_sniper":
+        if ( level.environment != "" && self isItemUnlocked( "ghillie_" + level.environment ) )
+            [[game[ team + "_model" ]["GHILLIE"]]]();
+        else
+            [[game[ team + "_model" ]["SNIPER"]]]();
+        break;
+    case "weapon_lmg":
+        [[game[ team + "_model" ]["LMG"]]]();
+        break;
+    case "weapon_riot":
+        [[game[ team + "_model" ]["RIOT"]]]();
+        break;
+    case "weapon_shotgun":
+        [[game[ team + "_model" ]["SHOTGUN"]]]();
+        break;
+    default:
+        [[game[team+"_model"]["ASSAULT"]]]();
+        break;
+    }
+
+    if ( self isJuggernaut() )
+    {
+        [[game[ team + "_model" ]["JUGGERNAUT"]]]();  
     }
 }

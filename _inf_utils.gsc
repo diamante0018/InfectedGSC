@@ -68,11 +68,11 @@ codeCallbackPlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 
 playLeaderDialog( sound )
 {
-    assert( self.sessionteam != "spectator" );
+    assert( self.pers["team"] != "spectator" );
 
     suffix = "1mc_" + sound;
 
-    if ( self.sessionteam == "allies" )
+    if ( self.pers["team"] == "allies" )
     {
         self playLocalSound( getTeamVoicePrefix( game["allies"] ) + suffix );
     }

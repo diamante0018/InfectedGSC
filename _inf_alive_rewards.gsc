@@ -34,7 +34,7 @@ monitorForRewards()
 	for ( ;; )
 	{
 		self waittill( "killed_enemy" );
-		if ( self.sessionteam == "axis" ) return; // It's infected. Once your team is axis you are done for the game
+		if ( self.pers["team"] == "axis" ) return; // It's infected. Once your team is axis you are done for the game
 		count = self.kills;
 		switch( count )
 		{
