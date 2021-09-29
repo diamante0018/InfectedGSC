@@ -20,52 +20,64 @@ init()
 
 onConnect()
 {
-    for ( ;; )
-    {
-        level waittill( "connected", player );
-        player thread monitorForRewards();
-    }
+	for ( ;; )
+	{
+		level waittill( "connected", player );
+		player thread monitorForRewards();
+	}
 }
 
 monitorForRewards()
 {
 	self endon( "disconnect" );
 	level endon( "game_ended" );
+
 	for ( ;; )
 	{
 		self waittill( "killed_enemy" );
+
 		if ( self.pers["team"] == "axis" ) return; // It's infected. Once your team is axis you are done for the game
+
 		count = self.kills;
-		switch( count )
+
+		switch ( count )
 		{
-		case 1:
-			self scripts\_inf_utils::playLeaderDialog( "kill_confirmed" );
-			level thread dropAmmo( self );
-			break;
-		case 5:
-			self maps\mp\killstreaks\_killstreaks::giveKillstreak( "deployable_vest" );
-			break;
-		case 9:
-			self maps\mp\killstreaks\_killstreaks::giveKillstreak( "predator_missile" );
-			break;
-		case 18:
-			level thread maps\mp\killstreaks\_airdrop::doMegaC130FlyBy( self, self.origin, randomFloat( 360 ), "airdrop_grnd", -360 );
-			break;
-		case 25:
-			self maps\mp\killstreaks\_juggernaut::giveJuggernaut( "juggernaut" );
-			break;
-		case 45:
-			self maps\mp\killstreaks\_killstreaks::giveKillstreak( "ac130" );
-			break;
-		case 85:
-			self maps\mp\killstreaks\_killstreaks::giveKillstreak( "helicopter_flares" );
-			break;
-		case 100:
-			self maps\mp\killstreaks\_killstreaks::giveKillstreak( "osprey_gunner" );
-			break;
-		case 120:
-			level thread maps\mp\killstreaks\_airdrop::dropNuke( self.origin, self, "nuke_drop" );
-			break;
+			case 1:
+				self scripts\_inf_utils::playLeaderDialog( "kill_confirmed" );
+				level thread dropAmmo( self );
+				break;
+
+			case 5:
+				self maps\mp\killstreaks\_killstreaks::giveKillstreak( "deployable_vest" );
+				break;
+
+			case 9:
+				self maps\mp\killstreaks\_killstreaks::giveKillstreak( "predator_missile" );
+				break;
+
+			case 18:
+				level thread maps\mp\killstreaks\_airdrop::doMegaC130FlyBy( self, self.origin, randomFloat( 360 ), "airdrop_grnd", -360 );
+				break;
+
+			case 25:
+				self maps\mp\killstreaks\_juggernaut::giveJuggernaut( "juggernaut" );
+				break;
+
+			case 45:
+				self maps\mp\killstreaks\_killstreaks::giveKillstreak( "ac130" );
+				break;
+
+			case 85:
+				self maps\mp\killstreaks\_killstreaks::giveKillstreak( "helicopter_flares" );
+				break;
+
+			case 100:
+				self maps\mp\killstreaks\_killstreaks::giveKillstreak( "osprey_gunner" );
+				break;
+
+			case 120:
+				level thread maps\mp\killstreaks\_airdrop::dropNuke( self.origin, self, "nuke_drop" );
+				break;
 		}
 	}
 }
@@ -90,7 +102,7 @@ dropAmmo( owner )
 
 	d = length( startPos - endPos );
 	flyTime = ( d / planeFlySpeed );
-	
+
 	c130 = maps\mp\killstreaks\_airdrop::c130Setup( owner, startPos, endPos );
 	c130.veh_speed = planeFlySpeed;
 	c130.dropType = "airdrop";
@@ -98,10 +110,11 @@ dropAmmo( owner )
 
 	c130.angles = direction;
 	forward = anglesToForward( direction );
-	c130 moveTo( endPos, flyTime, 0, 0 ); 
+	c130 moveTo( endPos, flyTime, 0, 0 );
 
 	boomPlayed = false;
 	minDist = distance2D( c130.origin, dropSite );
+
 	for ( ;; )
 	{
 		dist = distance2D( c130.origin, dropSite );
@@ -116,29 +129,30 @@ dropAmmo( owner )
 		else if ( dist < 768 )
 		{
 			earthquake( 0.15, 1.5, dropSite, 1500 );
+
 			if ( !boomPlayed )
 			{
 				c130 playSound( "veh_ac130_sonic_boom" );
 				boomPlayed = true;
 			}
-		}	
+		}
 
-		wait( .05 );	
-	}	
-	
+		wait( .05 );
+	}
+
 	c130 thread maps\mp\killstreaks\_airdrop::dropTheCrate( dropSite, "airdrop", lbHeight, false, "ammo", startPos );
 	wait( 0.05 );
 	c130 notify ( "drop_crate" );
 
 	wait( 4 );
-	c130 delete();
+	c130 delete ();
 }
 
 ammoCrateThink( dropType )
-{	
+{
 	self endon ( "death" );
 	self.usedBy = [];
-	
+
 	if ( dropType == "airdrop" || !level.teamBased )
 		maps\mp\killstreaks\_airdrop::crateSetupForUse( game["strings"]["ammo_hint"], "all", "waypoint_ammo_friendly" );
 	else
@@ -150,7 +164,7 @@ ammoCrateThink( dropType )
 	for ( ;; )
 	{
 		self waittill ( "captured", player );
-		
+
 		if ( isDefined( self.owner ) && player != self.owner )
 		{
 			if ( !level.teamBased || player.team != self.team )
@@ -160,8 +174,8 @@ ammoCrateThink( dropType )
 				else
 					player thread maps\mp\killstreaks\_airdrop::hijackNotify( self, "emergency_airdrop" );
 			}
-		}		
-		
+		}
+
 		player maps\mp\killstreaks\_teamammorefill::refillAmmo( true );
 		self maps\mp\killstreaks\_airdrop::deleteCrate();
 	}
@@ -176,24 +190,25 @@ giveJuggernautStub( juggType )
 	if ( isDefined( self.hasLightArmor ) && self.hasLightArmor == true )
 		maps\mp\perks\_perkfunctions::removeLightArmor( self.previousMaxHealth );
 
-	switch( juggType )
+	switch ( juggType )
 	{
-	case "juggernaut":
-		self.isJuggernaut = true;
-		self maps\mp\gametypes\_class::giveLoadout( self.pers["team"], juggType, false, false );
-		break;
-	case "juggernaut_recon":
-		self.isJuggernautRecon = true;
-		self maps\mp\gametypes\_class::giveLoadout( self.pers["team"], juggType, false, false );
+		case "juggernaut":
+			self.isJuggernaut = true;
+			self maps\mp\gametypes\_class::giveLoadout( self.pers["team"], juggType, false, false );
+			break;
 
-		portable_radar = spawn( "script_model", self.origin );
-		portable_radar.team = self.team;
+		case "juggernaut_recon":
+			self.isJuggernautRecon = true;
+			self maps\mp\gametypes\_class::giveLoadout( self.pers["team"], juggType, false, false );
 
-		portable_radar makePortableRadar( self );
-		self.personalRadar = portable_radar;
+			portable_radar = spawn( "script_model", self.origin );
+			portable_radar.team = self.team;
 
-		self thread maps\mp\killstreaks\_juggernaut::radarMover( portable_radar );
-		break;
+			portable_radar makePortableRadar( self );
+			self.personalRadar = portable_radar;
+
+			self thread maps\mp\killstreaks\_juggernaut::radarMover( portable_radar );
+			break;
 	}
 
 	if ( !getDvarInt( "camera_thirdPerson" ) )
@@ -214,7 +229,7 @@ giveJuggernautStub( juggType )
 	self thread maps\mp\killstreaks\_juggernaut::juggernautSounds();
 	self setPerk( "specialty_radarjuggernaut", true, false );
 
-	self thread teamPlayerCardSplash( level.juggSettings[ juggType ].splashUsedName, self );	
+	self thread teamPlayerCardSplash( level.juggSettings[ juggType ].splashUsedName, self );
 	self PlaySoundToTeam( game[ "voice" ][ self.team ] + "use_juggernaut", self.team, self );
 	self PlaySoundToTeam( game[ "voice" ][ level.otherTeam[ self.team ] ] + "enemy_juggernaut", level.otherTeam[ self.team ] );
 

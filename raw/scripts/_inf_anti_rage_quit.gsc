@@ -9,27 +9,28 @@
 
 init()
 {
-    thread antiRageQuit();
+	thread antiRageQuit();
 }
 
 antiRageQuit()
 {
-    level endon( "game_ended" );
-    gameFlagWait( "prematch_done" );
+	level endon( "game_ended" );
+	gameFlagWait( "prematch_done" );
 
-    for ( ;; )
-    {
-        wait( .5 );
+	for ( ;; )
+	{
+		wait( .5 );
+
 //      If it's only 2 people let them quit
-        if (level.players.size < 3) continue;
+		if ( level.players.size < 3 ) continue;
 
-        foreach( player in level.players )
-        {
-            if ( player.pers["team"] == "axis" )
-            {
-                player closepopupmenu( "" );
-                player closeingamemenu();
-            }
-        }
-    }
+		foreach ( player in level.players )
+		{
+			if ( player.pers["team"] == "axis" )
+			{
+				player closepopupmenu( "" );
+				player closeingamemenu();
+			}
+		}
+	}
 }
