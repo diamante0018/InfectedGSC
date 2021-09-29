@@ -9,7 +9,7 @@
 
 init()
 {
-    level._effect[ "nolight_burst_mp" ]	= loadfx( "fire/firelp_huge_pm_nolight_burst" );
+    level._effect[ "nolight_burst_mp" ] = loadfx( "fire/firelp_huge_pm_nolight_burst" );
     precacheMpAnim( "windmill_spin_med" );
     precacheMpAnim( "foliage_desertbrush_1_sway" );
     precacheMpAnim( "oilpump_pump01" );
