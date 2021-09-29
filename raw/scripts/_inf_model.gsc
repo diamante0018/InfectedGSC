@@ -108,8 +108,7 @@ playerModelForWeaponStub( weapon, secondary )
 		return;
 	}
 
-//  Hack for infected players
-	if ( self.pers["team"] == "axis" )
+	if ( self.pers["team"] == "axis" ) // Hack for infected players
 	{
 		if ( level.environment != "" && self isItemUnlocked( "ghillie_" + level.environment ) )
 			[[game[ team + "_model" ]["GHILLIE"]]]();

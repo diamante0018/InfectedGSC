@@ -53,8 +53,7 @@ gameEnded()
 	}
 }
 
-// Might need to set cg_thirdperson to false when a player spawns
-gameStart()
+gameStart() // Might need to set cg_thirdperson to false when a player spawns
 {
 	gameFlagWait( "prematch_done" );
 
@@ -118,8 +117,7 @@ GlowStickDamageListenerStub( owner )
 		if ( !isdefined( self ) )
 			return;
 
-//      Can only be damaged by knife
-		if ( type == "MOD_MELEE" )
+		if ( type == "MOD_MELEE" ) // Can only be damaged by knife
 		{
 			self.damageTaken += self.maxHealth;
 			self.wasDamaged = true;
@@ -135,7 +133,7 @@ GlowStickDamageListenerStub( owner )
 			if ( isDefined( owner ) && attacker != owner )
 			{
 				attacker notify ( "destroyed_insertion", owner );
-				attacker notify( "destroyed_explosive" ); // count towards SitRep Pro challenge
+				attacker notify( "destroyed_explosive" );
 				owner thread leaderDialogOnPlayer( "ti_destroyed" );
 			}
 

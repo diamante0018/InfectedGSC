@@ -21,8 +21,7 @@ antiRageQuit()
 	{
 		wait( .5 );
 
-//      If it's only 2 people let them quit
-		if ( level.players.size < 3 ) continue;
+		if ( level.players.size < 3 ) continue; // If it's only 2 people let them quit
 
 		foreach ( player in level.players )
 		{
