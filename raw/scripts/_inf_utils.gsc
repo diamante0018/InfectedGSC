@@ -16,6 +16,11 @@ init()
     setDvar( "scr_killcam_time", 7 );
     setDvar( "scr_killcam_posttime", 2 );
 
+    setDvar( "g_playerCollision", 2 );
+    setDvar( "g_playerEjection", 2 );
+    setDvar( "sv_enableBounces", 1 );
+    setDvar( "jump_slowdownEnable", 0 );
+
     thread gameEnded();
     thread gameStart();
 
