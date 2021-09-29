@@ -32,33 +32,28 @@ domeDyn()
 
 		if ( isSubStr( model_name, "fence_tarp_" ) )
 		{
-//          print( "domeDyn fence_tarp_" );
 			animated[i].targetname = "dynamic_model";
 			precacheMpAnim( model_name + "_med_01" );
 			animated[i] ScriptModelPlayAnim( model_name + "_med_01" );
 		}
 		else if ( model_name == "machinery_windmill" )
 		{
-//          print( "domeDyn machinery_windmill" );
 			animated[i].targetname = "dynamic_model";
 			animated[i] ScriptModelPlayAnim( "windmill_spin_med" );
 		}
 		else if ( isSubStr( model_name, "foliage" ) )
 		{
-//          print( "domeDyn foliage" );
 			animated[i].targetname = "dynamic_model";
 			animated[i] ScriptModelPlayAnim( "foliage_desertbrush_1_sway" );
 		}
 		else if ( isSubStr( model_name, "oil_pump_jack" ) )
 		{
-//          print( "domeDyn oil_pump_jack" );
 			animated[i].targetname = "dynamic_model";
 			animation = "oilpump_pump0" + ( randomint( 2 ) + 1 );
 			animated[i] ScriptModelPlayAnim( animation );
 		}
 		else if ( model_name == "accessories_windsock_large" )
 		{
-//          print( "domeDyn accessories_windsock_large" );
 			animated[i].targetname = "dynamic_model";
 			animated[i] ScriptModelPlayAnim( "windsock_large_wind_medium" );
 		}
@@ -140,32 +135,27 @@ nukeDeath()
 
 			if ( isSubStr( model_name, "fence_tarp_" ) )
 			{
-//              print( "Doing fenceEffect" );
 				dynamic[i] thread fenceEffect();
 			}
 
 			else if ( model_name == "machinery_windmill" )
 			{
-//              print( "Doing machinery_windmill" );
 				dynamic[i] rotateroll( 80, 2, .5, .1 );
 				dynamic[i] thread clearAmim( 1 );
 			}
 
 			else if ( isSubStr( model_name, "foliage" ) )
 			{
-//              print( "Doing foliage" );
 				dynamic[i].origin -= ( 0, 0, 50 );
 			}
 
 			else if ( isSubStr( model_name, "oil_pump_jack" ) )
 			{
-//              print( "Doing oil_pump_jack" );
 				dynamic[i] self_func( "scriptModelClearAnim" );
 			}
 
 			else if ( model_name == "accessories_windsock_large" )
 			{
-//              print( "Doing accessories_windsock_large" );
 				dynamic[i] thread windsockLarge();
 			}
 		}
