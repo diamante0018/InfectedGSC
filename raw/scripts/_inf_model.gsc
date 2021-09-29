@@ -131,6 +131,7 @@ playerModelForWeaponStub( weapon, secondary )
 			break;
 
 		case "weapon_sniper":
+
 			if ( level.environment != "" && self isItemUnlocked( "ghillie_" + level.environment ) )
 				[[game[ team + "_model" ]["GHILLIE"]]]();
 			else
