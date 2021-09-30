@@ -68,7 +68,7 @@ giveAllPerks()
 	perks[ perks.size ] = "specialty_coldblooded";
 	perks[ perks.size ] = "specialty_quickdraw";
 
-	perks[ perks.size ] = "_specialty_blastshield";
+	perks[ perks.size ] = "specialty_blastshield";
 	perks[ perks.size ] = "specialty_detectexplosive";
 	perks[ perks.size ] = "specialty_autospot";
 	perks[ perks.size ] = "specialty_bulletaccuracy";
