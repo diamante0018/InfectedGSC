@@ -19,7 +19,7 @@ init()
 	preCacheShader( "iw5_cardicon_juggernaut_a" );
 
 	preCacheItem( "at4_mp" );
-	precacheItem( "uav_strike_marker_mp" );
+	preCacheItem( "uav_strike_marker_mp" );
 }
 
 onConnect()
@@ -48,8 +48,10 @@ connected()
 		else
 		{
 			self giveAllPerks();
-			self SetOffhandPrimaryClass( "other" );
+			self setOffhandSecondaryClass( "smoke" );
 			self giveWeapon( "bouncingbetty_mp" );
+			self giveWeapon( "smoke_grenade_mp" );
+			self setWeaponAmmoClip( "smoke_grenade_mp", 1 );
 		}
 	}
 }
