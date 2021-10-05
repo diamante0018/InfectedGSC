@@ -41,63 +41,12 @@ connected()
 		self waittill( "spawned_player" );
 		waittillframeend;
 
-		if ( self.pers["team"] == "allies" )
-		{
-			self giveAllPerks();
-		}
-		else
-		{
-			self giveAllPerks();
-			self setOffhandSecondaryClass( "smoke" );
-			self giveWeapon( "bouncingbetty_mp" );
-			self giveWeapon( "smoke_grenade_mp" );
-			self setWeaponAmmoClip( "smoke_grenade_mp", 1 );
-		}
-	}
-}
+		if ( self.pers["team"] != "axis" ) continue;
 
-giveAllPerks()
-{
-	perks = [];
-	perks[ perks.size ] = "specialty_longersprint";
-	perks[ perks.size ] = "specialty_fastreload";
-	perks[ perks.size ] = "specialty_scavenger";
-	perks[ perks.size ] = "specialty_blindeye";
-	perks[ perks.size ] = "specialty_paint";
-	perks[ perks.size ] = "specialty_hardline";
-	perks[ perks.size ] = "specialty_coldblooded";
-	perks[ perks.size ] = "specialty_quickdraw";
-
-	perks[ perks.size ] = "_specialty_blastshield";
-	perks[ perks.size ] = "specialty_blastshield";
-	perks[ perks.size ] = "specialty_detectexplosive";
-	perks[ perks.size ] = "specialty_autospot";
-	perks[ perks.size ] = "specialty_bulletaccuracy";
-
-	perks[ perks.size ] = "specialty_quieter";
-	perks[ perks.size ] = "specialty_stalker";
-
-	perks[ perks.size ] = "specialty_bulletpenetration";
-	perks[ perks.size ] = "specialty_marksman";
-	perks[ perks.size ] = "specialty_sharp_focus";
-	perks[ perks.size ] = "specialty_holdbreathwhileads";
-	perks[ perks.size ] = "specialty_longerrange";
-	perks[ perks.size ] = "specialty_fastermelee";
-	perks[ perks.size ] = "specialty_reducedsway";
-	perks[ perks.size ] = "specialty_lightweight";
-
-	foreach ( perkName in perks )
-	{
-		if ( !self _hasPerk( perkName ) )
-		{
-			self givePerk( perkName, false );
-
-			if ( maps\mp\gametypes\_class::isPerkUpgraded( perkName ) )
-			{
-				perkUpgrade = tablelookup( "mp/perktable.csv", 1, perkName, 8 );
-				self givePerk( perkUpgrade, false );
-			}
-		}
+		self setOffhandSecondaryClass( "smoke" );
+		self _giveWeapon( "bouncingbetty_mp" );
+		self _giveWeapon( "smoke_grenade_mp" );
+		self setWeaponAmmoClip( "smoke_grenade_mp", 1 );
 	}
 }
 

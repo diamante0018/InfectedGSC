@@ -14,6 +14,10 @@ init()
 	maps\mp\killstreaks\_airdrop::addCrateType( "nuke_drop", "nuke", 1, maps\mp\killstreaks\_airdrop::nukeCrateThink );
 	maps\mp\killstreaks\_airdrop::addCrateType( "airdrop", "ammo", 17, ::ammoCrateThink );
 	maps\mp\killstreaks\_airdrop::addCrateType( "airdrop_mega", "ammo", 12, ::ammoCrateThink );
+	maps\mp\killstreaks\_airdrop::addCrateType( "airdrop_assault", "ammo", 12, ::ammoCrateThink );
+	maps\mp\killstreaks\_airdrop::addCrateType( "airdrop_osprey_gunner", "ammo", 12, ::ammoCrateThink );
+	maps\mp\killstreaks\_airdrop::addCrateType( "airdrop_grnd", "ammo", 12, ::ammoCrateThink );
+	maps\mp\killstreaks\_airdrop::addCrateType( "airdrop_support", "ammo", 12, ::ammoCrateThink );
 
 	thread onConnect();
 }
@@ -153,10 +157,7 @@ ammoCrateThink( dropType )
 	self endon ( "death" );
 	self.usedBy = [];
 
-	if ( dropType == "airdrop" || !level.teamBased )
-		maps\mp\killstreaks\_airdrop::crateSetupForUse( game["strings"]["ammo_hint"], "all", "waypoint_ammo_friendly" );
-	else
-		maps\mp\killstreaks\_airdrop::crateSetupForUse( game["strings"]["ammo_hint"], "all", "waypoint_ammo_friendly" );
+	maps\mp\killstreaks\_airdrop::crateSetupForUse( game["strings"]["ammo_hint"], "all", "waypoint_ammo_friendly" );
 
 	self thread maps\mp\killstreaks\_airdrop::crateOtherCaptureThink();
 	self thread maps\mp\killstreaks\_airdrop::crateOwnerCaptureThink();
