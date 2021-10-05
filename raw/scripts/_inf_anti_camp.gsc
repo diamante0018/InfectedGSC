@@ -34,7 +34,10 @@ connected()
 		self waittill( "spawned_player" );
 
 		if ( self.pers["team"] != "allies" )
+		{
 			self.anti_camp = false;
+			return; // You can't go back to allies team because it's infect mode
+		}
 	}
 }
 
