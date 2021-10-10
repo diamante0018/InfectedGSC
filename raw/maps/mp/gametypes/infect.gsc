@@ -2,8 +2,8 @@
 	infect
 	Author: FutureRave
 	Date: 10/10/2021
-    Notes: Removed prematch, console related things and added dm (FFA)
-    spawn points
+	Notes: Removed prematch, console related things and added dm (FFA)
+	spawn points
 */
 
 main()
