@@ -32,8 +32,8 @@ main()
 	}
 
 	setSpecialLoadouts();
-	level.teamBased = 1;
-	level.doPrematch = 0;
+	level.teamBased = true;
+	level.doPrematch = false;
 	level.onPrecacheGameType = ::onPrecacheGameType;
 	level.onStartGameType = ::onStartGameType;
 	level.onSpawnPlayer = ::onSpawnPlayer;
@@ -120,17 +120,19 @@ onStartGameType()
 	maps\mp\gametypes\_rank::registerScoreInfo( "kill", 50 );
 	maps\mp\gametypes\_rank::registerScoreInfo( "draft_rogue", 200 );
 	maps\mp\gametypes\_rank::registerScoreInfo( "survivor", 50 );
-	level.QuickMessageToAll = 1;
-	level.blockWeaponDrops = 1;
+
+	level.QuickMessageToAll = true;
+	level.blockWeaponDrops = false;
+
 	level.infect_allowsuicide = 0;
 	level.infect_timerDisplay = maps\mp\gametypes\_hud_util::createServerTimer( "objective", 1.4 );
 	level.infect_timerDisplay maps\mp\gametypes\_hud_util::setPoint( "TOPLEFT", "TOPLEFT", 115, 5 );
 	level.infect_timerDisplay.label = &"MP_DRAFT_STARTS_IN";
 	level.infect_timerDisplay.alpha = 0;
 	level.infect_timerDisplay.archived = 0;
-	level.infect_timerDisplay.hidewheninmenu = 1;
-	level.infect_choseFirstInfected = 0;
-	level.infect_choosingFirstInfected = 0;
+	level.infect_timerDisplay.hidewheninmenu = true;
+	level.infect_choseFirstInfected = false;
+	level.infect_choosingFirstInfected = false;
 	level.infect_awardedfinalsurvivor = 0;
 	level.infect_teamscores["axis"] = 0;
 	level.infect_teamscores["allies"] = 0;
@@ -144,7 +146,7 @@ onPlayerConnect()
 	for ( ;; )
 	{
 		level waittill( "connected",  player  );
-		player.infect_firstSpawn = 1;
+		player.infect_firstSpawn = true;
 
 		if ( maps\mp\_utility::gameFlag( "prematch_done" ) )
 			player.infect_joinedatstart = 0;
@@ -160,16 +162,16 @@ getSpawnPoint()
 {
 	if ( self.infect_firstSpawn )
 	{
-		self.infect_firstSpawn = 0;
+		self.infect_firstSpawn = false;
 		self.pers["class"] = "gamemode";
 		self.pers["lastClass"] = "";
 		self.class = self.pers["class"];
 		self.lastClass = self.pers["lastClass"];
 
 		if ( isdefined( self.infect_rejoined ) )
-			maps\mp\gametypes\_menus::addToTeam( "axis", 1 );
+			maps\mp\gametypes\_menus::addToTeam( "axis", true );
 		else
-			maps\mp\gametypes\_menus::addToTeam( "allies", 1 );
+			maps\mp\gametypes\_menus::addToTeam( "allies", true );
 
 		thread onPlayerDisconnect();
 	}
@@ -196,7 +198,7 @@ onSpawnPlayer()
 
 	if ( !level.infect_choosingFirstInfected )
 	{
-		level.infect_choosingFirstInfected = 1;
+		level.infect_choosingFirstInfected = true;
 		level thread chooseFirstInfected();
 	}
 
@@ -207,7 +209,7 @@ onSpawnPlayer()
 		if ( !level.infect_allowsuicide )
 		{
 			level notify( "infect_stopCountdown" );
-			level.infect_choseFirstInfected = 1;
+			level.infect_choseFirstInfected = true;
 			level.infect_allowsuicide = 1;
 
 			foreach ( var_1 in level.players )
@@ -224,7 +226,7 @@ onSpawnPlayer()
 		}
 
 		if ( level.infect_teamscores["axis"] == 1 )
-			self.isInitialInfected = 1;
+			self.isInitialInfected = true;
 	}
 
 	if ( isdefined( self.isInitialInfected ) )
@@ -362,13 +364,13 @@ setfirstinfected( var_0 )
 	if ( var_0 )
 	{
 		maps\mp\gametypes\_menus::addToTeam( "axis" );
-		level.infect_choseFirstInfected = 1;
+		level.infect_choseFirstInfected = true;
 		self.infect_isBeingChosen = undefined;
 		updateTeamScores();
 		level.infect_allowsuicide = 1;
 	}
 
-	self.isInitialInfected = 1;
+	self.isInitialInfected = true;
 	self.pers["gamemodeLoadout"] = level.infect_loadouts["axis_initial"];
 
 	if ( isdefined( self.setSpawnpoint ) )
@@ -477,7 +479,7 @@ onPlayerKilled( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
 		else
 		{
 			var_1 thread maps\mp\gametypes\_rank::xpEventPopup( &"SPLASHES_DRAFTED" );
-			maps\mp\gametypes\_gamescore::givePlayerScore( "draft_rogue", var_1, self, 1 );
+			maps\mp\gametypes\_gamescore::givePlayerScore( "draft_rogue", var_1, self, true );
 			var_1 thread maps\mp\gametypes\_rank::giveRankXP( "draft_rogue" );
 		}
 
@@ -523,7 +525,7 @@ onfinalsurvivor()
 			{
 				if ( var_1.infect_joinedatstart && distance( var_1.infect_spawnpos, var_1.origin ) > 32 )
 				{
-					maps\mp\gametypes\_gamescore::givePlayerScore( "final_rogue", var_1, undefined, 1 );
+					maps\mp\gametypes\_gamescore::givePlayerScore( "final_rogue", var_1, undefined, true );
 					var_1 thread maps\mp\gametypes\_rank::giveRankXP( "final_rogue" );
 				}
 
@@ -635,7 +637,7 @@ onPlayerDisconnect()
 			}
 			else if ( level.infect_teamscores["allies"] > 1 )
 			{
-				level.infect_choseFirstInfected = 0;
+				level.infect_choseFirstInfected = false;
 				level thread chooseFirstInfected();
 			}
 		}
