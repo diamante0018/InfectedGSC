@@ -2,7 +2,6 @@
     _inf_model
     Author: FutureRave
     Date: 27/09/2021
-    Notes: Fuck the models for now
 */
 
 #include common_scripts\utility;
