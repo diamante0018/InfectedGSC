@@ -77,7 +77,7 @@ codeCallbackPlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 		return;
 	}
 
-	if ( sWeapon == "iw5_1887_mp" )
+	if ( isSubStr( sWeapon, "iw5_1887_mp" ) && sMeansOfDeath != "MOD_MELEE" )
 	{
 		iDamage = 35;
 	}
