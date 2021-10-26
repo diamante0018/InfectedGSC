@@ -12,7 +12,6 @@ init()
 	replaceFunc( maps\mp\perks\_perkfunctions::GlowStickDamageListener, ::GlowStickDamageListenerStub );
 	replaceFunc( maps\mp\perks\_perkfunctions::GlowStickEnemyUseListener, ::GlowStickEnemyUseListenerStub );
 
-	create_dvar( "sv_fallDamage", 0 );
 	setDvar( "scr_killcam_time", 7 );
 	setDvar( "scr_killcam_posttime", 2 );
 
@@ -24,8 +23,13 @@ init()
 	thread gameEnded();
 	thread gameStart();
 
-	if ( getDvarInt( "sv_fallDamage" ) != 0 ) return;
+	thread hookCallbacks();
+}
 
+hookCallbacks()
+{
+	level waittill( "prematch_over" );
+	waittillframeend;
 	level.prevCallbackPlayerDamage = level.callbackPlayerDamage;
 	level.callbackPlayerDamage = ::codeCallbackPlayerDamage;
 }
@@ -71,6 +75,11 @@ codeCallbackPlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 	{
 		eAttacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback( "" );
 		return;
+	}
+
+	if ( sWeapon == "iw5_1887_mp" )
+	{
+		iDamage = 35;
 	}
 
 	[[level.prevCallbackPlayerDamage]]( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset );
