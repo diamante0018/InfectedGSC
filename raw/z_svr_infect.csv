@@ -1,9 +1,0 @@
-stringtable,mp/perkTable.csv
-rawfile,maps/mp/gametypes/infect.gsc
-rawfile,scripts/_inf_alive_rewards.gsc
-rawfile,scripts/_inf_anti_camp.gsc
-rawfile,scripts/_inf_anti_rage_quit.gsc
-rawfile,scripts/_inf_model.gsc
-rawfile,scripts/_inf_nuke_dome.gsc
-rawfile,scripts/_inf_utils.gsc
-rawfile,z_svr_infect
