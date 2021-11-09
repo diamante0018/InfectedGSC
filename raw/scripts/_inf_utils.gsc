@@ -14,16 +14,51 @@ init()
 
 	setDvar( "scr_killcam_time", 7 );
 	setDvar( "scr_killcam_posttime", 2 );
+	setDvar( "scr_nukeTimer", 5 );
+	level.nukeTimer = getDvarInt( "scr_nukeTimer" );
 
 	setDvar( "g_playerCollision", 2 );
 	setDvar( "g_playerEjection", 2 );
 	setDvar( "sv_enableBounces", 1 );
 	setDvar( "jump_slowdownEnable", 0 );
 
+	thread onPlayerConnect();
+
 	thread gameEnded();
 	thread gameStart();
 
 	thread hookCallbacks();
+}
+
+onPlayerConnect()
+{
+	for ( ;; )
+	{
+		level waittill( "connecting", player );
+		player thread setUpDvars();
+		player thread onPlayerSpawned();
+	}
+}
+
+setUpDvars()
+{
+	self setClientDvars(
+	    "cg_weaponHintsCoD1Style", 0,
+	    "cg_hudGrenadeIconMaxRangeFrag", 500.0
+	);
+}
+
+onPlayerSpawned()
+{
+	self endon( "disconnect" );
+
+	for ( ;; )
+	{
+		if ( gameFlag( "prematch_done" ) ) return;
+
+		self waittill( "spawned_player" );
+		self freezeControls( false );
+	}
 }
 
 hookCallbacks()
