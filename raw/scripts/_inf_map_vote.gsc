@@ -1,10 +1,10 @@
 /*
-    _inf_anti_camp
-    Author: FutureRave
+    _inf_map_vote
+    Author: FutureRave, Callanb
     Changelog:
     - Ignore bots
     - Remove map descriptions because I feel like they are useless
-    Date: 27/09/2021
+    Date: 09/11/2021
 */
 
 #include maps\mp\_utility;
