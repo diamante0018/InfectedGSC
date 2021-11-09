@@ -1,7 +1,7 @@
 /*
-    _inf_nuke_dome
-    Author: FutureRave, Slvr11
-    Date: 10/06/2021
+	_inf_nuke_dome
+	Author: FutureRave, Slvr11
+	Date: 10/06/2021
 */
 
 #include common_scripts\utility;

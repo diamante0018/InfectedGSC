@@ -1,7 +1,7 @@
 /*
-    _inf_anti_rage_quit
-    Author: FutureRave
-    Date: 29/09/2021
+	_inf_anti_rage_quit
+	Author: FutureRave
+	Date: 29/09/2021
 */
 
 #include common_scripts\utility;
