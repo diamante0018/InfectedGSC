@@ -139,7 +139,7 @@ getTweakableValue( category, name )
 	/#
 	overrideDvar = "scr_" + level.gameType + "_" + category + "_" + name;
 	return getDvarInt( overrideDvar, value );
-        #/
+	#/
 	assert( isDefined( value ) );
 	return value;
 }
