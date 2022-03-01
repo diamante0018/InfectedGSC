@@ -10,6 +10,7 @@
 init()
 {
 	thread antiRageQuit();
+	thread onPlayerConnect();
 }
 
 antiRageQuit()
@@ -32,4 +33,20 @@ antiRageQuit()
 			}
 		}
 	}
+}
+
+onPlayerConnect()
+{
+	for ( ;; )
+	{
+		level waittill( "connected", player );
+		player thread onPlayerDisconnect();
+	}
+}
+
+onPlayerDisconnect()
+{
+	self waittill( "disconnect" );
+	text = "say \"" + self.name + " ^1Left the server\"\n";
+	cmdExec( text );
 }

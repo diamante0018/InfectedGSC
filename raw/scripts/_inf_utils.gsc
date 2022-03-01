@@ -26,8 +26,6 @@ init()
 
 	thread gameEnded();
 	thread gameStart();
-
-	thread hookCallbacks();
 }
 
 onPlayerConnect()
@@ -61,14 +59,6 @@ onPlayerSpawned()
 	}
 }
 
-hookCallbacks()
-{
-	level waittill( "prematch_over" );
-	waittillframeend;
-	level.prevCallbackPlayerDamage = level.callbackPlayerDamage;
-	level.callbackPlayerDamage = ::codeCallbackPlayerDamage;
-}
-
 gameEnded()
 {
 	gameFlagWait( "prematch_done" );
@@ -100,24 +90,6 @@ gameStart() // Might need to set cg_thirdperson to false when a player spawns
 	{
 		player setClientDvar ( "cg_thirdperson", false );
 	}
-}
-
-codeCallbackPlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset )
-{
-	self endon( "disconnect" );
-
-	if ( sMeansOfDeath == "MOD_FALLING" || self isUsingRemote() )
-	{
-		eAttacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback( "" );
-		return;
-	}
-
-	if ( isSubStr( sWeapon, "iw5_1887_mp" ) && sMeansOfDeath != "MOD_MELEE" )
-	{
-		iDamage = 35;
-	}
-
-	[[level.prevCallbackPlayerDamage]]( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset );
 }
 
 playLeaderDialog( sound )
