@@ -78,7 +78,7 @@ a0,b1,c2,d3,e4,f5,g6,h7,i8,j9
 76,specialty_radararrow,,,,slot_null,,,,
 77,specialty_radarjuggernaut,,,,slot_null,,,,
 78,specialty_marathon,PERKS_MARATHON,specialty_marathon,PERKS_DESC_MARATHON,perk1,,,specialty_fastmantle,PERKS_MARATHON_PRO
-79,specialty_jumpdive,PERKS_JUMPDIVE,specialty_jumpdive,PERKS_DESC_JUMPDIVE,perk1,,,specialty_null,
+79,specialty_jumpdive,PERKS_JUMPDIVE,specialty_jumpdive,PERKS_DESC_JUMPDIVE,slot_null,,,specialty_null,
 perk1,0.3333,0.4941,0.6196,,,,,,
 perk2,0.5255,0.5686,0.3804,,,,,,
 perk3,0.6196,0.3373,0.3373,,,,,,
