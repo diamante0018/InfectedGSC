@@ -1,0 +1,12 @@
+# Add two removed perks
+stringtable,mp/perktable.csv
+
+# Override
+rawfile,maps/mp/mp_dome.gsc
+rawfile,maps/mp/mp_exchange.gsc
+rawfile,maps/mp/mp_radar.gsc
+
+rawfile,maps/mp/gametypes/_tweakables.gsc
+rawfile,maps/mp/gametypes/infect.gsc
+
+rawfile,mod

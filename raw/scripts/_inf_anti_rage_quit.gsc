@@ -47,6 +47,6 @@ onPlayerConnect()
 onPlayerDisconnect()
 {
 	self waittill( "disconnect" );
-	text = "say \"" + self.name + " ^1Left the server\"\n";
-	cmdExec( text );
+	text = self.name + " ^1Left the server";
+	iPrintLn( text );
 }
